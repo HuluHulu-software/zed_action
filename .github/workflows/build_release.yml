@@ -158,7 +158,13 @@ jobs:
           rust-version: ${{ github.event.inputs.TOOLCHAINS }}
           target: ${{ matrix.target }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
+          
+      - name: "📦 Install system dependencies (Linux)"
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libva-dev
+          
       - name: "⚙️ Configure Git"
         shell: bash
         run: |
